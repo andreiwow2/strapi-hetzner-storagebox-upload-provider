@@ -35,31 +35,33 @@ interface ProviderOptions {
     }
 }
 
-export default {
-    init({ destinationPath, boxUrl, auth, sshPort = 23 }: ProviderOptions) {
-        const sshConfig: HetznerStorageBoxConfig = {
-            host: boxUrl,
-            port: sshPort,
-            username: auth.user,
-            password: auth.password,
-        }
+const int = ({ destinationPath, boxUrl, auth, sshPort = 23 }: ProviderOptions) => {
+    const sshConfig: HetznerStorageBoxConfig = {
+        host: boxUrl,
+        port: sshPort,
+        username: auth.user,
+        password: auth.password,
+    }
 
-        const uploadToHetznerBox = async (file: File, fileStream: ReadStream) => {
-            const filePath = `${destinationPath}/${file.name}`;
-            await new HetznerStorageBox(sshConfig).uploadFile(fileStream, filePath);
-        }
+    const uploadToHetznerBox = async (file: File, fileStream: ReadStream) => {
+        const filePath = `${destinationPath}/${file.name}`;
+        await new HetznerStorageBox(sshConfig).uploadFile(fileStream, filePath);
+    }
 
-        return {
-            upload(file: File) {
-                if (!file.buffer) throw new Error('No buffer found');
-                return uploadToHetznerBox(file, Readable.from(file.buffer) as ReadStream);
-            },
-            uploadStream(file: File) {
-                if (!file.stream) throw new Error('No stream found');
-                return uploadToHetznerBox(file, file.stream);
-            },
-            delete(file: File) {},
-            getSignedUrl(file: File) {},
-        }
-    },
+    return {
+        upload(file: File) {
+            if (!file.buffer) throw new Error('No buffer found');
+            return uploadToHetznerBox(file, Readable.from(file.buffer) as ReadStream);
+        },
+        uploadStream(file: File) {
+            if (!file.stream) throw new Error('No stream found');
+            return uploadToHetznerBox(file, file.stream);
+        },
+        delete(file: File) {},
+        getSignedUrl(file: File) {},
+    }
+}
+
+module.exports = {
+    int
 }

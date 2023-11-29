@@ -38,43 +38,43 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var stream_1 = require("stream");
 var hetznerStorageBoxClass_1 = require("./hetznerStorageBoxClass");
-exports.default = {
-    init: function (_a) {
-        var _this = this;
-        var destinationPath = _a.destinationPath, boxUrl = _a.boxUrl, auth = _a.auth, _b = _a.sshPort, sshPort = _b === void 0 ? 23 : _b;
-        var sshConfig = {
-            host: boxUrl,
-            port: sshPort,
-            username: auth.user,
-            password: auth.password,
-        };
-        var uploadToHetznerBox = function (file, fileStream) { return __awaiter(_this, void 0, void 0, function () {
-            var filePath;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        filePath = "".concat(destinationPath, "/").concat(file.name);
-                        return [4 /*yield*/, new hetznerStorageBoxClass_1.HetznerStorageBox(sshConfig).uploadFile(fileStream, filePath)];
-                    case 1:
-                        _a.sent();
-                        return [2 /*return*/];
-                }
-            });
-        }); };
-        return {
-            upload: function (file) {
-                if (!file.buffer)
-                    throw new Error('No buffer found');
-                return uploadToHetznerBox(file, stream_1.Readable.from(file.buffer));
-            },
-            uploadStream: function (file) {
-                if (!file.stream)
-                    throw new Error('No stream found');
-                return uploadToHetznerBox(file, file.stream);
-            },
-            delete: function (file) { },
-            getSignedUrl: function (file) { },
-        };
-    },
+var int = function (_a) {
+    var destinationPath = _a.destinationPath, boxUrl = _a.boxUrl, auth = _a.auth, _b = _a.sshPort, sshPort = _b === void 0 ? 23 : _b;
+    var sshConfig = {
+        host: boxUrl,
+        port: sshPort,
+        username: auth.user,
+        password: auth.password,
+    };
+    var uploadToHetznerBox = function (file, fileStream) { return __awaiter(void 0, void 0, void 0, function () {
+        var filePath;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    filePath = "".concat(destinationPath, "/").concat(file.name);
+                    return [4 /*yield*/, new hetznerStorageBoxClass_1.HetznerStorageBox(sshConfig).uploadFile(fileStream, filePath)];
+                case 1:
+                    _a.sent();
+                    return [2 /*return*/];
+            }
+        });
+    }); };
+    return {
+        upload: function (file) {
+            if (!file.buffer)
+                throw new Error('No buffer found');
+            return uploadToHetznerBox(file, stream_1.Readable.from(file.buffer));
+        },
+        uploadStream: function (file) {
+            if (!file.stream)
+                throw new Error('No stream found');
+            return uploadToHetznerBox(file, file.stream);
+        },
+        delete: function (file) { },
+        getSignedUrl: function (file) { },
+    };
+};
+module.exports = {
+    int: int
 };
 //# sourceMappingURL=index.js.map
