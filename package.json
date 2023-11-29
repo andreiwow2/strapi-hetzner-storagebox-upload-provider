@@ -6,7 +6,8 @@
   "author": "Divergent aka andreiwow2",
   "license": "MIT",
   "scripts": {
-    "prepare": "tsc"
+    "prepare": "yarn build-ts",
+    "build-ts": "tsc"
   },
   "devDependencies": {
     "@types/node": "^20.10.0",
