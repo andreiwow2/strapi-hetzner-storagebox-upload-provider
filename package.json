@@ -5,10 +5,6 @@
   "main": "dist/index.js",
   "author": "Divergent aka andreiwow2",
   "license": "MIT",
-  "scripts": {
-    "prepare": "yarn build-ts",
-    "build-ts": "tsc"
-  },
   "devDependencies": {
     "@types/node": "^20.10.0",
     "@types/ssh2": "^1.11.18",
