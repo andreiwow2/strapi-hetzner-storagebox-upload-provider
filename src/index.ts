@@ -1,6 +1,6 @@
 import type { ReadStream } from 'node:fs';
 import { Readable } from 'stream';
-import { HetznerStorageBox, HetznerStorageBoxConfig } from './hetznerStorageBox.class';
+import { HetznerStorageBox, HetznerStorageBoxConfig } from './hetznerStorageBoxClass';
 
 interface File {
     name: string;
